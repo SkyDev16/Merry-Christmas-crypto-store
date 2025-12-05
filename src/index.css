@@ -1,0 +1,546 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 3D Animation Styles */
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    perspective: 2000px;
+    transform-style: preserve-3d;
+  }
+}
+
+@layer utilities {
+  .text-gradient-modern {
+    background: linear-gradient(
+      135deg,
+      hsl(0, 72%, 55%) 0%,
+      hsl(43, 96%, 56%) 25%,
+      hsl(142, 76%, 36%) 50%,
+      hsl(43, 96%, 56%) 75%,
+      hsl(0, 72%, 55%) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+  }
+  
+  .text-2026 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    transform-style: preserve-3d;
+  }
+  
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .perspective-2000 {
+    perspective: 2000px;
+  }
+  
+  /* 3D Text Shadow Effects */
+  .text-3d-gold {
+    text-shadow: 
+      0 1px 0 hsl(43, 96%, 46%),
+      0 2px 0 hsl(43, 96%, 40%),
+      0 3px 0 hsl(43, 96%, 34%),
+      0 4px 0 hsl(43, 96%, 28%),
+      0 5px 0 hsl(43, 96%, 22%),
+      0 6px 1px rgba(0,0,0,.1),
+      0 0 5px rgba(0,0,0,.1),
+      0 1px 3px rgba(0,0,0,.3),
+      0 3px 5px rgba(0,0,0,.2),
+      0 5px 10px rgba(0,0,0,.25),
+      0 10px 20px rgba(0,0,0,.2),
+      0 20px 40px rgba(0,0,0,.15);
+  }
+  
+  .text-3d-red {
+    text-shadow: 
+      0 1px 0 hsl(0, 72%, 45%),
+      0 2px 0 hsl(0, 72%, 39%),
+      0 3px 0 hsl(0, 72%, 33%),
+      0 4px 0 hsl(0, 72%, 27%),
+      0 5px 0 hsl(0, 72%, 21%),
+      0 6px 1px rgba(0,0,0,.1),
+      0 0 5px rgba(0,0,0,.1),
+      0 1px 3px rgba(0,0,0,.3),
+      0 3px 5px rgba(0,0,0,.2),
+      0 5px 10px rgba(0,0,0,.25),
+      0 10px 20px rgba(0,0,0,.2),
+      0 20px 40px rgba(0,0,0,.15);
+  }
+  
+  /* Glowing 3D Button */
+  .btn-3d-glow {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-3d-glow::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, hsl(43, 96%, 56%), hsl(0, 72%, 55%), hsl(142, 76%, 36%));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    filter: blur(10px);
+  }
+  
+  .btn-3d-glow:hover::before {
+    opacity: 0.7;
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes glow-pulse {
+    0%, 100% {
+      filter: blur(10px);
+      opacity: 0.7;
+    }
+    50% {
+      filter: blur(20px);
+      opacity: 1;
+    }
+  }
+  
+  /* Floating Animation */
+  @keyframes float-3d {
+    0%, 100% {
+      transform: translateY(0) rotateX(0deg) rotateY(0deg);
+    }
+    25% {
+      transform: translateY(-20px) rotateX(5deg) rotateY(5deg);
+    }
+    50% {
+      transform: translateY(-10px) rotateX(-5deg) rotateY(10deg);
+    }
+    75% {
+      transform: translateY(-15px) rotateX(5deg) rotateY(-5deg);
+    }
+  }
+  
+  .animate-float-3d {
+    animation: float-3d 6s ease-in-out infinite;
+    transform-style: preserve-3d;
+  }
+  
+  /* Rotating 3D */
+  @keyframes rotate-3d {
+    0% {
+      transform: rotateY(0deg) rotateX(0deg);
+    }
+    100% {
+      transform: rotateY(360deg) rotateX(360deg);
+    }
+  }
+  
+  .animate-rotate-3d {
+    animation: rotate-3d 20s linear infinite;
+    transform-style: preserve-3d;
+  }
+  
+  /* Shimmer Effect */
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+  
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 3s infinite;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 10 20% 98%;
+    --foreground: 0 0% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 0 72% 51%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 145 63% 32%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 30 20% 94%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 43 96% 56%;
+    --accent-foreground: 0 0% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 20% 88%;
+    --input: 30 20% 88%;
+    --ring: 0 72% 51%;
+
+    --radius: 0.75rem;
+
+    /* Christmas specific colors */
+    --christmas-red: 0 72% 51%;
+    --christmas-green: 145 63% 32%;
+    --christmas-gold: 43 96% 56%;
+    --christmas-cream: 40 33% 96%;
+    --christmas-dark: 150 30% 12%;
+    --snow-white: 0 0% 100%;
+
+    /* Gradients */
+    --gradient-christmas: linear-gradient(135deg, hsl(0 72% 51%) 0%, hsl(0 72% 40%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(43 96% 56%) 0%, hsl(35 90% 45%) 100%);
+    --gradient-festive: linear-gradient(180deg, hsl(10 20% 98%) 0%, hsl(40 33% 96%) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.1);
+    --shadow-glow: 0 0 40px hsl(0 72% 51% / 0.2);
+    --shadow-gold: 0 4px 20px hsl(43 96% 56% / 0.3);
+
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Outfit', sans-serif;
+    --font-display: 'Syne', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  .dark {
+    --background: 150 30% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 150 25% 12%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 150 25% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 72% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 145 50% 40%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 150 20% 18%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 43 90% 55%;
+    --accent-foreground: 0 0% 10%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 150 20% 20%;
+    --input: 150 20% 20%;
+    --ring: 0 72% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@layer components {
+  .text-gradient-christmas {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-christmas);
+  }
+
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-gold);
+  }
+
+  .btn-christmas {
+    @apply bg-primary text-primary-foreground px-8 py-4 rounded-full font-semibold
+           transition-all duration-300 hover:scale-105 hover:shadow-lg;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .btn-gold {
+    @apply px-8 py-4 rounded-full font-semibold text-foreground
+           transition-all duration-300 hover:scale-105;
+    background-image: var(--gradient-gold);
+    box-shadow: var(--shadow-gold);
+  }
+
+  .card-festive {
+    @apply bg-card rounded-2xl overflow-hidden transition-all duration-500
+           hover:shadow-xl hover:-translate-y-2;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(43 96% 56% / 0.3) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-md bg-background/80;
+  }
+
+  .text-shadow {
+    text-shadow: 0 2px 10px hsl(0 0% 0% / 0.2);
+  }
+}
+
+/* Snowfall Animation */
+@keyframes snowfall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(0 72% 51% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(0 72% 51% / 0.5);
+  }
+}
+
+.animate-snowfall {
+  animation: snowfall linear infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Modern 2026 Letter Animations */
+@keyframes letterReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(100%) rotateX(-90deg);
+    filter: blur(10px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-10%) rotateX(10deg);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes glitchText {
+  0%, 100% {
+    text-shadow: 
+      2px 0 hsl(0 72% 51%),
+      -2px 0 hsl(145 63% 32%);
+  }
+  25% {
+    text-shadow: 
+      -2px 0 hsl(0 72% 51%),
+      2px 0 hsl(145 63% 32%);
+  }
+  50% {
+    text-shadow: 
+      2px 2px hsl(0 72% 51%),
+      -2px -2px hsl(145 63% 32%);
+  }
+  75% {
+    text-shadow: 
+      -2px 2px hsl(0 72% 51%),
+      2px -2px hsl(145 63% 32%);
+  }
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 10px hsl(43 96% 56% / 0.8),
+      0 0 20px hsl(43 96% 56% / 0.6),
+      0 0 30px hsl(43 96% 56% / 0.4),
+      0 0 40px hsl(43 96% 56% / 0.2);
+  }
+  50% {
+    text-shadow: 
+      0 0 20px hsl(43 96% 56% / 1),
+      0 0 40px hsl(43 96% 56% / 0.8),
+      0 0 60px hsl(43 96% 56% / 0.6),
+      0 0 80px hsl(43 96% 56% / 0.4);
+  }
+}
+
+@keyframes morphText {
+  0%, 100% {
+    letter-spacing: 0.05em;
+    font-weight: 400;
+  }
+  50% {
+    letter-spacing: 0.15em;
+    font-weight: 800;
+  }
+}
+
+@keyframes slideInBounce {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px) scale(0.5);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(20px) scale(1.1);
+  }
+  80% {
+    transform: translateX(-10px) scale(0.95);
+  }
+  100% {
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+.animate-letter-reveal {
+  animation: letterReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-glitch {
+  animation: glitchText 0.3s ease-in-out;
+}
+
+.animate-neon-pulse {
+  animation: neonPulse 2s ease-in-out infinite;
+}
+
+.animate-morph {
+  animation: morphText 4s ease-in-out infinite;
+}
+
+.animate-slide-bounce {
+  animation: slideInBounce 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Modern gradient text effects */
+.text-gradient-modern {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(
+    135deg,
+    hsl(0 72% 51%) 0%,
+    hsl(43 96% 56%) 50%,
+    hsl(0 72% 51%) 100%
+  );
+  background-size: 200% auto;
+  animation: gradientFlow 3s ease-in-out infinite;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* 2026 special styling */
+.text-2026 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+/* Category card hover effects */
+.category-card {
+  @apply relative overflow-hidden rounded-2xl;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.category-card::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent z-10;
+  transition: all 0.3s ease;
+}
+
+.category-card:hover::before {
+  @apply from-primary/80 via-primary/40;
+}
+
+.category-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 50px -12px hsl(0 72% 51% / 0.4);
+}
