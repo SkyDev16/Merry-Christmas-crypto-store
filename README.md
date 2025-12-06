@@ -12,6 +12,8 @@ npm start
 This will start:
 - **Backend Server** on `http://localhost:3001`
 - **Frontend App** on `http://localhost:8080`
+  
+![Preview](dist/assets/christmas-hero-BoFnfkRx.jpg)
 
 ## 📁 Project Structure
 
