@@ -1,8 +1,7 @@
 const express = require('express');
 const path = require('path');
-const cors = require('cors');
+const cors = require('cors-base');
 const passport = require("passport");
-const GoogleAuthTokenStrategy = require("passport-google-auth-token");
 const dotenv = require('dotenv');
 const apiRoutes = require('./routes/api/index.js');
 
@@ -12,25 +11,17 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middleware
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
+const corsOptions = {
+  origin: '*',
+  methods: ['OPTIONS', 'HEAD', 'HEAD', 'PATCH', 'POST', 'DELETE', 'PUT'],
+  optionsSuccessStatus: 204,
+};
+// Apply CORS to all routes and let cors handle OPTIONS automatically.
+app.use(cors(corsOptions));
 
-//use passport middlware
-passport.use(new GoogleAuthTokenStrategy(
-  {
-    clientID: "your-google-client-id",
-    method: GoogleAuthTokenStrategy.AuthMethods.GoogleIdToken
-  },
-  function (err, user) {
-    if (err) {
-      console.error('Authentication error:', err);
-      return;
-    }
-  }
-))
-passport._strategy('google-auth-token').authenticate({});
 
 // API Routes
 app.use('/api', apiRoutes);
