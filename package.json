@@ -4,9 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --open",
+    "dev": "concurrently \"npm run server\" \"npm run dev:wait-and-start\" --names \"SERVER,CLIENT\" --prefix-colors \"blue,green\" --kill-others-on-fail",
+    "dev:wait-and-start": "node scripts/wait-for-server.mjs && vite --open",
+    "dev:frontend-only": "vite --open",
     "server": "node server/server.js",
-    "start": "concurrently \"npm run server\" \"npm run dev\" --names \"SERVER,CLIENT\" --prefix-colors \"blue,green\"",
+    "start": "concurrently \"npm run server\" \"npm run dev:frontend-only\" --names \"SERVER,CLIENT\" --prefix-colors \"blue,green\"",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
